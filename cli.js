@@ -20,10 +20,10 @@ if (args.h) {
 }
 
 
-const timezone = moment.tz.guest();
+const timezone = args.z || moment.tz.guest();
 
-var latitude = args.n || -1*args.s;
-var longitude = args.e || -1*args.w;
+var latitude = args.n || -1 * args.s;
+var longitude = args.e || -1 * args.w;
 
 
 const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=' + latitude + '&longitude=' + longitude + '&daily=precipitation_hours&temperature_unit=fahrenheit&windspeed_unit=mph&timezone=' + timezone);
@@ -50,3 +50,4 @@ if (days == 0) {
 } else {
     console.log('tomorrow.');
 }
+
