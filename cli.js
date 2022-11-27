@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 
+//dependencies
 import minimist from 'minimist';
 import fetch from 'node-fetch';
 import moment from "moment-timezone";
 
 const args = minimist(process.argv.slice(2));
 
-const helpText = `Usage: galosh.js [options] -[n|s] LATITUDE -[e|w] LONGITUDE -z TIME_ZONE
+const helpText = 
+`Usage: galosh.js [options] -[n|s] LATITUDE -[e|w] LONGITUDE -z TIME_ZONE
 -h            Show this help message and exit.
 -n, -s        Latitude: N positive; S negative.
 -e, -w        Longitude: E positive; W negative.
@@ -20,7 +22,7 @@ if (args.h) {
 }
 
 
-const timezone = args.z || moment.tz.guest();
+const timezone = args.z || moment.tz.guess();
 
 var latitude = args.n || -1 * args.s;
 var longitude = args.e || -1 * args.w;
@@ -46,7 +48,7 @@ if (data.daily.precipitation_hours[days] !== 0) {
 if (days == 0) {
     console.log('today.');
 } else if (days > 1) {
-    console.log('in' + days + ' days.');
+    console.log('in ' + days + ' days.');
 } else {
     console.log('tomorrow.');
 }
